@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if form %}
+  <h1 class="page-header">Entrer un bon de commande</h1>
+  <div class="col-md-4 col-md-offset-4">
+    <form method='POST' action=''> {% csrf_token %}
+    {{ form|crispy }}
+    <input type='submit' class='btn btn-primary' value='Entrer PO' />
+    </form>
+  </div>
+{% elif po_form %}
+  
+
+  <h1 class="page-header">Entrer le PO</h1>
+  <div class="col-md-10 col-md-offset-1">
+    <form method='POST' action=''> {% csrf_token %}
+      <table class="table">
+        <tr>
+          <th></th>
+          <th>Quantité</th>
+          <th>Produit</th>
+          <th>Nom</th>
+          <th>Date</th>
+        </tr>
+        {% for prod in queryset %}
+        <tr>
+          <td><input type="checkbox" name="prod" value="{{ prod.id }}"></td>
+          <td>{{ prod.quantite }}</td>
+          <td>{{ prod.produit }}</td>
+          <td>{{ prod.commande.nom_client }}</td>
+          <td>{{ prod.commande.ts_commande|date:"d E Y" }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% for choice in form.produit.field %}
+        {{ choice }}
+      {% endfor %}
+      <input type='text' name='numero'>
+      <input type='submit' class='btn btn-primary' value='Entrer PO' />
+    </form>
+  </div>
+{% elif result %}
+  <h1 class="page-header">Merci!</h1>
+  <div class="col-md-4 col-md-offset-4">
+    Vous avez complété votre bon de commande!
+  </div>
+{% endif %}
+
+{% endblock content %}

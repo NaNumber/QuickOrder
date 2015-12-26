@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1 class='text-center'>{{ title }}</h1>
+  <hr>
+  {% if form_com %}
+  <form method='POST' action=''> {% csrf_token %}
+    <div class='col-sm-12 text-center'>
+      <input type='submit' class='btn btn-primary' value='Enregistrer' /><br/><br/>
+    </div>
+    <div class='col-md-4'>
+      <div class='panel panel-primary'>
+        <div class='panel-heading'>Information sur la commande</div>
+        <div class='panel-body'>{{ form_com|crispy}}</div>
+      </div>
+    </div>
+    
+    {{ formset.management_form}}
+    {% for form_prod in formset %}
+    <div {% if forloop.counter > 1 %} style="display:none"{% endif %}class='col-md-4 prod_form'>
+      <div class='panel panel-default'>
+        <div class='panel-heading'>Produit #{{ forloop.counter }}</div>
+        <div class='panel-body'>
+          {{ form_prod|crispy }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class='col-md-4 text-center' style='padding-top:8em;'>
+      <input type='button' class='btn btn-warning' value='Ajouter un produit' id='button_add' />
+    </div>
+
+    <div class='col-sm-12 text-center'>
+      <input type='submit' class='btn btn-primary' value='Enregistrer' />
+    </div>
+  </form>
+  {% endif %}
+  {% if numero_commande %}
+    <p>Le numéro de commande est le {{ numero_commande }}
+  {% endif %}
+{% endblock content %}

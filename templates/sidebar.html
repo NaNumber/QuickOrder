@@ -1,0 +1,37 @@
+
+<ul class="nav nav-sidebar">
+  <li {% if request.path == "/commande/" %}class="active"{% endif %}>
+    <a href="/commande/"><span class="item">Commandes</span></a>
+  </li>
+  <li {% if request.path == "/commande/nouvelle/" %}class="active"{% endif %}>
+    <a href="/commande/nouvelle/"><span class="subitem">Nouvelle Commande</span></a>
+  </li>
+  <li {% if request.path == "/commande/po/" %}class="active"{% endif %}>
+    <a href="/commande/po/"><span class="subitem">Bon de Commande</span></a>
+  </li>
+</ul>
+<ul class="nav nav-sidebar">
+  <li {% if request.path == "/rma/" %}class="active"{% endif %}>
+    <a href="/rma/"><span class="item">RMA</span></a>
+  </li>
+  <li {% if request.path == "/rma/nouveau/" %}class="active"{% endif %}>
+    <a href="/rma/nouveau/"><span class="subitem">Nouveau RMA</span></a>
+  </li>
+  <li {% if request.path == "/rma/facture/" %}class="active"{% endif %}>
+    <a href="/rma/facture/"><span class="subitem">Entrer # Facture</span></a>
+  </li>
+  <li {% if request.path == "/rma/numrma/" %}class="active"{% endif %}>
+    <a href="/rma/numrma/"><span class="subitem">Entrer # RMA</span></a>
+  </li>
+
+</ul>
+<ul class="nav nav-sidebar">
+  <li {% if request.path == "/pac/" %}class="active"{% endif %}>
+    <a href="/pac/"><span class="item">PAC</span></a>
+  </li>
+</ul>
+<ul class="nav nav-sidebar">
+  <li {% if request.path == "/appel/" %}class="active"{% endif %}>
+    <a href="/appel/"><span class="item">Appel Client</span></a>
+  </li>
+</ul>
