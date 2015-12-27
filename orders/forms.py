@@ -28,4 +28,4 @@ class MyModelMultipleChoiceField(forms.ModelMultipleChoiceField):
 
 class PoForm(forms.Form):
     produit = MyModelMultipleChoiceField(queryset=Produit.objects.all(),
-                                             widget=forms.CheckboxSelectMultiple)
+                                         widget=forms.CheckboxSelectMultiple)

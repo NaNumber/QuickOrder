@@ -1,8 +1,11 @@
 from django.db import models
 
 
-# Create your models here.
 class Statut(models.Model):
+    """
+    Statut d'une commande.
+    Note: Est-ce qu'on devrait hard coder ca?
+    """
     num_statut = models.SmallIntegerField('numéro du statut')
     nom_statut = models.CharField('Statut', max_length=20)
 
@@ -11,6 +14,9 @@ class Statut(models.Model):
 
 
 class Fournisseur(models.Model):
+    """
+    Liste des fournisseurs qu'une commande spécial peut provenir
+    """
     nom = models.CharField(max_length=50)
     phone = models.CharField(max_length=40, blank=True, null=True)
 
@@ -19,6 +25,9 @@ class Fournisseur(models.Model):
 
 
 class Employe(models.Model):
+    """
+    Liste des employés.
+    """
     nom = models.CharField(max_length=40)
     nom_complet = models.CharField(max_length=100, blank=True, null=True)
     short = models.CharField(max_length=3)
@@ -28,6 +37,10 @@ class Employe(models.Model):
 
 
 class Commande(models.Model):
+    """
+    Modèle pour une commande.
+    Une commande peut contenir plusieurs items (produits), mais un seul client.
+    """
     # num = models.CharField(max_length=10, primary_key=True)
 
     # Client
@@ -70,6 +83,9 @@ class Commande(models.Model):
 
 
 class Produit(models.Model):
+    """
+    Modèle d'un produit. Un produit est lié à une commande.
+    """
     commande = models.ForeignKey(Commande, on_delete=models.CASCADE)
     produit = models.CharField(max_length=500)
     quantite = models.SmallIntegerField('Quantité')
@@ -77,5 +93,5 @@ class Produit(models.Model):
     statut_produit = models.ForeignKey(Statut)
     # Fournisseur
     fournisseur = models.ForeignKey(Fournisseur, related_name='fournisseur')
-    purchase_order = models.CharField(max_length=40)
+    purchase_order = models.CharField(max_length=40, blank=True, null=True)
 
